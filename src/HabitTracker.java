@@ -34,8 +34,27 @@ public class HabitTracker {
         } else {
             System.out.println("Lista nawyków:");
             for (Habit habit : habits) {
-                System.out.println("- " + habit.getName());
+                System.out.println("Nawyk: " + habit.getName() + " wykonano: " + habit.getCompletedDates().size() + " razy, wskaźnik wykonania: " + String.format("%.2f", habit.getCompletionRate()) + "%");
             }
+        }
+    }
+
+    // Removed duplicate method to resolve the error
+
+    private Habit findHabitByName(String name) {
+        
+        return habits.stream().filter(h -> h.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+
+    }
+
+    public void showHabitStatistics(String habitName){
+        Habit habit = findHabitByName(habitName);
+        if (habit != null) {
+            System.out.println("Statystyki nawyku: " + habit.getName());
+            System.out.println("Liczba wykonanych dni: " + habit.getCompletedDates().size());
+            System.out.println("Wskaźnik wykonania: " + String.format("%.2f", habit.getCompletionRate()) + "%");
+        } else {
+            System.out.println("Nie znaleziono nawyku o nazwie: " + habitName);
         }
     }
 

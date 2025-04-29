@@ -1,16 +1,18 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Habit {
     private String name;
-    private List <LocalDate> completedDates;
+    private Set<LocalDate> completedDates;
 
     // Konstructor
     // Initializes the name of the habit and creates an empty list for completed dates
     public Habit(String name) {
         this.name = name;
-        this.completedDates = new ArrayList<>();
+        this.completedDates = new HashSet<>(); // Using HashSet to avoid duplicates
         
     }
 
@@ -27,11 +29,21 @@ public class Habit {
             completedDates.add(date);
         }
     }
+
+    public Set<LocalDate> getCompletedDatesSet() {
+        // Returns the set of completed dates
+        return completedDates;
+    }
     
-    // Adds a completed date to the list of completed dates
-    // The date is added only if it is not already present in the list
-    public void addCompletedDate(LocalDate date) {
-        this.completedDates.add(date);
+  
+    public double getCompletionRate() {
+        if(completedDates.isEmpty()) {
+            return 0;
+        }
+
+        LocalDate startDate = completedDates.stream().min(LocalDate::compareTo).orElse(LocalDate.now());
+        long totalDays = startDate.until(LocalDate.now()).getDays() + 1; // Include the current day
+        return (double) completedDates.size() / totalDays * 100; // Completion rate in percentage
     }
     
     // Returns the list of completed dates

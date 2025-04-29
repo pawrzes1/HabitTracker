@@ -28,6 +28,7 @@ public class Main{
         JButton markButton = new JButton("Zaznacz nawyk jako wykonany");
         JButton showButton = new JButton("Wyswietl wszystkie nawyki");
         JButton historyButton = new JButton("Wyswietl historie nawyku");
+        JButton statisticsButton = new JButton("Statystyki nawyku");
         JButton exitButton = new JButton("Wyjdz");
 
 
@@ -35,6 +36,7 @@ public class Main{
         markButton.setFont(font);
         showButton.setFont(font);
         historyButton.setFont(font);
+        statisticsButton.setFont(font);
         exitButton.setFont(font);
 
 
@@ -43,6 +45,7 @@ public class Main{
         panel.add(markButton);
         panel.add(showButton);
         panel.add(historyButton);
+        panel.add(statisticsButton);
         panel.add(exitButton);
 
         //Dodajemy panel do okna
@@ -95,6 +98,18 @@ public class Main{
                 String habitName = JOptionPane.showInputDialog(frame, "Podaj nazwe nawyku:");
                 if(habitName != null && !habitName.isEmpty()) {
                     habitTracker.showHabitHistory(habitName);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Prosze podac nazwe nawyku.");
+                }
+            }
+        });
+
+        statisticsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String habitName = JOptionPane.showInputDialog(frame, "Podaj nazwe nawyku:");
+                if(habitName != null && !habitName.isEmpty()) {
+                    habitTracker.showHabitStatistics(habitName);
                 } else {
                     JOptionPane.showMessageDialog(frame, "Prosze podac nazwe nawyku.");
                 }
